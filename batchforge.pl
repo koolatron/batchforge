@@ -1,7 +1,6 @@
 #!/usr/bin/perl -w
 
 # batchforge.pl -- a batch wrapper for skeinforge
-#  koolatron
 #
 #  Description
 #  ===========
@@ -26,6 +25,7 @@
 use Getopt::Long;
 use Scalar::Util qw(reftype);
 use Cwd;
+use FindBin qw($Bin);
 use strict;
 
 $SIG{INT} = \&SIGINT;
@@ -92,7 +92,7 @@ my $profileFile
     = -d "/Users"
     ? "/Users/" . getlogin() . "/.skeinforge/profiles/extrusion.csv"
     : "/home/" . getlogin() . "/.skeinforge/profiles/extrusion.csv";
-my $sfdir = $opts{sfdir} ? $opts{sfdir} : getcwd();
+my $sfdir = $opts{sfdir} ? $opts{sfdir} : $Bin;
 $opts{maxTasks} = $opts{maxTasks} ? $opts{maxTasks} : 2;
 my @profiles = @{ $opts{profile} }
     if ( reftype $opts{profile} && reftype $opts{profile} eq 'ARRAY' );
